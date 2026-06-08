@@ -8,40 +8,41 @@ MOBILE FLIP CARDS
 */
 
 document.addEventListener("DOMContentLoaded", () => {
+  const flipCards = document.querySelectorAll(".flip-card");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mobile = window.matchMedia("(max-width: 900px)").matches;
 
-  const cards = document.querySelectorAll(".flip-card");
+  flipCards.forEach((card) => {
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("aria-pressed", "false");
 
-  cards.forEach(card => {
+    const toggleFlip = () => {
+      const flipped = card.classList.toggle("flipped");
+      card.setAttribute("aria-pressed", String(flipped));
+    };
 
-    // Tap to flip
+    card.addEventListener("click", toggleFlip);
 
-    card.addEventListener("click", () => {
-      card.classList.toggle("flipped");
-    });
-
-  });
-
-  // Auto-flip when card enters viewport
-
-  const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-      if(entry.isIntersecting){
-
-        entry.target.classList.add("flipped");
-observer.unobserve(entry.target);
-
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleFlip();
       }
-
     });
-
-  }, {
-    threshold:0.6
   });
 
-  cards.forEach(card => {
-    observer.observe(card);
-  });
+  if (mobile && !reducedMotion) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !entry.target.classList.contains("flipped")) {
+          entry.target.classList.add("flipped");
+          entry.target.setAttribute("aria-pressed", "true");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.65 });
 
+    flipCards.forEach((card) => observer.observe(card));
+  }
 });
