@@ -1,6 +1,7 @@
 function toggleCard(card) {
   card.classList.toggle("active");
 }
+
 /*
 ========================================
 MOBILE FLIP CARDS
@@ -22,7 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
       card.setAttribute("aria-pressed", String(flipped));
     };
 
-    card.addEventListener("click", toggleFlip);
+    card.addEventListener("pointerup", (e) => {
+      e.preventDefault();
+      toggleFlip();
+    });
 
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
