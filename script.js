@@ -23,10 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.setAttribute("aria-pressed", String(flipped));
     };
 
-    card.addEventListener("pointerup", (e) => {
-      e.preventDefault();
-      toggleFlip();
-    });
+    card.addEventListener("click", toggleFlip);
 
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {

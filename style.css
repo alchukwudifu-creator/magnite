@@ -1083,7 +1083,6 @@ SANA VISION
 }
 
 /*
-/*
 ========================================
 FLIP CARDS
 ========================================
@@ -1450,7 +1449,6 @@ MOBILE
 
   .ecosystem-node.top{
     grid-area:top;
-    margin-bottom:4px;
   }
 
   .ecosystem-node.left{
