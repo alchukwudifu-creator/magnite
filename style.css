@@ -1413,7 +1413,7 @@ MOBILE
     "bottom bottom"
     "center center";
   column-gap:14px;
-  row-gap:24px;
+  row-gap:32px;
   justify-items:stretch;
   align-items:start;
 }
@@ -1422,7 +1422,7 @@ MOBILE
   content:"";
   position:absolute;
   left:50%;
-  top:76px;
+  top:92px;
   bottom:110px;
   width:2px;
   transform:translateX(-50%);
